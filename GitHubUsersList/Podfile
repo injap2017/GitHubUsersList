@@ -1,0 +1,17 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, '10.0'
+
+target 'GitHubUsersList' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for GitHubUsersList
+  pod 'ObjectMapper+Realm'
+  pod 'AlamofireObjectMapper'
+  pod 'DCKit'
+  pod 'SVProgressHUD'
+  pod 'IQKeyboardManagerSwift'
+  pod 'SwifterSwift'
+  pod 'SDWebImage'
+  pod 'PullToRefreshKit'
+end

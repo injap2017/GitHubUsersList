@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tXH-Ak-QsG">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--GitHub Users List-->
+        <scene sceneID="vvM-IP-aja">
+            <objects>
+                <tableViewController id="Ie8-NI-EVo" customClass="UsersViewController" customModule="GitHubUsersList" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="78" estimatedRowHeight="78" sectionHeaderHeight="28" sectionFooterHeight="28" id="foV-Vj-Yu7">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <connections>
+                            <outlet property="dataSource" destination="Ie8-NI-EVo" id="6LA-Zc-cNH"/>
+                            <outlet property="delegate" destination="Ie8-NI-EVo" id="UpH-yK-7zO"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="GitHub Users List" id="9Zo-wj-HhU"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wxh-qd-wcb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-262" y="138"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="EBH-hb-amm">
+            <objects>
+                <navigationController id="tXH-Ak-QsG" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="srV-D5-zPo">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Ie8-NI-EVo" kind="relationship" relationship="rootViewController" id="qTz-xY-A5O"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9QU-RK-tnz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1044" y="138"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
