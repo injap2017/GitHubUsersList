@@ -9,25 +9,6 @@ import UIKit
 import CoreData
 
 class UsersStore {
-/*
-    private var appDelegate: AppDelegate {
-        return UIApplication.shared.delegate as! AppDelegate
-    }
-    
-    private var context: NSManagedObjectContext {
-        return appDelegate.persistentContainer.viewContext
-    }
-    
-    private var entity: NSEntityDescription {
-        return NSEntityDescription.entity(forEntityName: "UserDetailsCore", in: context)!
-    }
-    
-    private var fetchRequest: NSFetchRequest<NSManagedObject> {
-        return NSFetchRequest<NSManagedObject>(entityName: "UserDetailsCore")
-    }*/
-}
-
-extension UsersStore {
     
     func addUser(_ user: UserDetails) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
