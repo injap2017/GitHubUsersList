@@ -61,7 +61,7 @@ extension UserDetailsViewController {
         // title
         self.title = user.username
         
-        self.avatarImageView.load(url: URL(string: user.avatar)!, placeholder: nil)
+        self.avatarImageView.load(url: URL(string: user.avatar)!, placeholder: UIImage(named: "blank-avatar"))
         self.followersLabel.text = "followers: \(user.followers)"
         self.followingLabel.text = "following: \(user.following)"
         self.nameLabel.text = user.name
