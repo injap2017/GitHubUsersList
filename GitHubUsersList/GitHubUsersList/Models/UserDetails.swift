@@ -6,16 +6,15 @@
 //
 
 import Foundation
-import RealmSwift
 import ObjectMapper
 
 class UserDetails: User {
-    @objc dynamic var name: String = ""
-    @objc dynamic var company: String = ""
-    @objc dynamic var blog: String = ""
-    @objc dynamic var followers: Int = 0
-    @objc dynamic var following: Int = 0
-    @objc dynamic var notes: String = ""
+    var name: String = ""
+    var company: String = ""
+    var blog: String = ""
+    var followers: Int = 0
+    var following: Int = 0
+    var notes: String = ""
     
     required convenience init?(map: Map) {
         self.init()

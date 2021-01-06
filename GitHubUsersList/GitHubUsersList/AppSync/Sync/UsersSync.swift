@@ -60,36 +60,6 @@ class UsersSync {
                     return
                 }
                 
-/*
-                let dispatchGroup = DispatchGroup()
-                
-                var us: [UserDetails] = []
-                for user in users! {
-                    dispatchGroup.enter()
-                    APIs.Users.getUser(of: user.username) { (user, error) in
-                        if let error = error {
-                            print(error)
-                            
-                            dispatchGroup.leave()
-                            return
-                        }
-                        
-                        us.append(user!)
-                        dispatchGroup.leave()
-                        return
-                    }
-                }
-                
-                dispatchGroup.notify(queue: .main) {
-                    us.sort { (first, second) -> Bool in
-                        first.id < second.id
-                    }
-                    
-                    Store.Users.updateUsersIgnoreNotes(us)
-                    completion(Store.Users.getUsers(since: at, per_page: per_page), nil)
-                    return
-                }*/
-                
                 Store.Users.updateUsersIgnoreDetails(users!)
                 completion(Store.Users.getUsers(since: at, per_page: per_page), nil)
                 return

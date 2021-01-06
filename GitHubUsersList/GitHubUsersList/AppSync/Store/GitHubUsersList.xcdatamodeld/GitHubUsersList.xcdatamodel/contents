@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17511" systemVersion="19H2" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="UserDetailsCore" representedClassName="UserDetailsCore" syncable="YES" codeGenerationType="class">
+        <attribute name="avatar" attributeType="String" defaultValueString=""/>
+        <attribute name="blog" attributeType="String" defaultValueString=""/>
+        <attribute name="company" attributeType="String" defaultValueString=""/>
+        <attribute name="followers" attributeType="Integer 32" minValueString="0" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="following" attributeType="Integer 32" minValueString="0" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="htmlURL" attributeType="String" defaultValueString=""/>
+        <attribute name="id" attributeType="Integer 64" minValueString="0" defaultValueString="-1" usesScalarValueType="YES"/>
+        <attribute name="name" attributeType="String" defaultValueString=""/>
+        <attribute name="notes" attributeType="String" defaultValueString=""/>
+        <attribute name="url" attributeType="String" defaultValueString=""/>
+        <attribute name="username" attributeType="String" defaultValueString=""/>
+    </entity>
+    <elements>
+        <element name="UserDetailsCore" positionX="-63" positionY="-18" width="128" height="208"/>
+    </elements>
+</model>

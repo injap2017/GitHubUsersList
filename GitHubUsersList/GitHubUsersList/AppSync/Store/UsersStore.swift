@@ -5,32 +5,55 @@
 //  Created by Edgar Sia on 12/23/20.
 //
 
-import Foundation
-import RealmSwift
+import UIKit
+import CoreData
 
 class UsersStore {
+/*
+    private var appDelegate: AppDelegate {
+        return UIApplication.shared.delegate as! AppDelegate
+    }
+    
+    private var context: NSManagedObjectContext {
+        return appDelegate.persistentContainer.viewContext
+    }
+    
+    private var entity: NSEntityDescription {
+        return NSEntityDescription.entity(forEntityName: "UserDetailsCore", in: context)!
+    }
+    
+    private var fetchRequest: NSFetchRequest<NSManagedObject> {
+        return NSFetchRequest<NSManagedObject>(entityName: "UserDetailsCore")
+    }*/
+}
+
+extension UsersStore {
     
     func addUser(_ user: UserDetails) {
-        let u = UserDetails()
-        user.copyTo(u)
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let entity = NSEntityDescription.entity(forEntityName: "UserDetailsCore", in: context)!
         
         do {
-            let realm = try Realm()
-            try realm.write {
-                realm.add(u)
-            }
+            let u = NSManagedObject(entity: entity, insertInto: context) as! UserDetailsCore
+            u.setValues(user)
+            try context.save()
         } catch let error {
             print(error)
         }
     }
     
     func getUser(of username: String) -> UserDetails? {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "UserDetailsCore")
+        
         do {
-            let realm = try Realm()
-            let object = realm.object(ofType: UserDetails.self, forPrimaryKey:username)
-            if let object = object {
+            fetchRequest.predicate = NSPredicate(format: "username == %@", username)
+            let results = try context.fetch(fetchRequest) as! [UserDetailsCore]
+            if let u = results.first {
                 let pureObject = UserDetails()
-                object.copyTo(pureObject)
+                u.copyTo(pureObject)
                 
                 return pureObject
             }
@@ -42,94 +65,67 @@ class UsersStore {
         }
     }
     
-    func updateUser(_ user: UserDetails) {
-        let u = UserDetails()
-        user.copyTo(u)
+    func updateUser(_ user: UserDetails, update: Bool = true) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let entity = NSEntityDescription.entity(forEntityName: "UserDetailsCore", in: context)!
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "UserDetailsCore")
         
         do {
-            let realm = try Realm()
-            try realm.write {
-                realm.add(u, update: .all)
-            }
-        }
-        catch let error {
-            print(error)
-        }
-    }
-    
-    func updateUserIgnoreNotes(_ user: UserDetails) {
-        let u = UserDetails()
-        user.copyTo(u)
-        
-        do {
-            let realm = try Realm()
-            
-            let object = realm.object(ofType: UserDetails.self, forPrimaryKey: u.username)
-            if let object = object {
-                u.notes = object.notes
-            }
-            
-            try realm.write {
-                realm.add(u, update: .all)
-            }
-        }
-        catch let error {
-            print(error)
-        }
-    }
-    
-    func updateUserIgnoreDetails(_ user: UserDetails) {
-        let u = UserDetails()
-        user.copyTo(u)
-        
-        do {
-            let realm = try Realm()
-            
-            let object = realm.object(ofType: UserDetails.self, forPrimaryKey: u.username)
-            if let object = object {
-                u.notes = object.notes
-                
-                u.name = object.name
-                u.company = object.company
-                u.blog = object.blog
-                u.followers = object.followers
-                u.following = object.following
-            }
-            
-            try realm.write {
-                realm.add(u, update: .all)
-            }
-        }
-        catch let error {
-            print(error)
-        }
-    }
-    
-    func addUsers(_ users: [UserDetails]) {
-        var us: [UserDetails] = []
-        for user in users {
-            let u = UserDetails()
-            user.copyTo(u)
-            
-            us.append(u)
-        }
-        
-        do {
-            let realm = try Realm()
-            try realm.write {
-                for u in us {
-                    realm.add(u)
+            fetchRequest.predicate = NSPredicate(format: "username == %@", user.username)
+            let results = try context.fetch(fetchRequest) as! [UserDetailsCore]
+            if let u = results.first {
+                u.setValues(user)
+                try context.save()
+            } else {
+                if update == true {
+                    let u = NSManagedObject(entity: entity, insertInto: context) as! UserDetailsCore
+                    u.setValues(user)
+                    try context.save()
                 }
             }
-        } catch let error {
+        }
+        catch let error {
             print(error)
         }
     }
-
-    func getUsers(since at: Int, per_page: Int) -> [UserDetails] {
+    
+    func updateUserIgnoreNotes(_ user: UserDetails, update: Bool = true) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let entity = NSEntityDescription.entity(forEntityName: "UserDetailsCore", in: context)!
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "UserDetailsCore")
+        
         do {
-            let realm = try Realm()
-            let objects = realm.objects(UserDetails.self).filter("id > \(at)").sorted(byKeyPath: "id", ascending: true)
+            fetchRequest.predicate = NSPredicate(format: "username == %@", user.username)
+            let results = try context.fetch(fetchRequest) as! [UserDetailsCore]
+            if let u = results.first {
+                u.setValuesIgnoreNotes(user)
+                try context.save()
+            } else {
+                if update == true {
+                    let u = NSManagedObject(entity: entity, insertInto: context) as! UserDetailsCore
+                    u.setValues(user)
+                    try context.save()
+                }
+            }
+        }
+        catch let error {
+            print(error)
+        }
+    }
+    
+    func getUsers(since at: Int, per_page: Int) -> [UserDetails] {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "UserDetailsCore")
+        
+        do {
+            fetchRequest.predicate = NSPredicate(format: "id > \(at)")
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
+            fetchRequest.fetchLimit = per_page
+            
+            let objects = try context.fetch(fetchRequest) as! [UserDetailsCore]
             
             var pureObjects: [UserDetails] = []
             for (i, object) in objects.enumerated() {
@@ -148,87 +144,29 @@ class UsersStore {
         }
     }
     
-    func updateUsers(_ users: [UserDetails]) {
-        var us: [UserDetails] = []
-        for user in users {
-            let u = UserDetails()
-            user.copyTo(u)
-            
-            us.append(u)
-        }
+    func updateUsersIgnoreDetails(_ users: [UserDetails], update: Bool = true) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let entity = NSEntityDescription.entity(forEntityName: "UserDetailsCore", in: context)!
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "UserDetailsCore")
         
         do {
-            let realm = try Realm()
-            try realm.write {
-                for u in us {
-                    realm.add(u, update: .all)
+            for user in users {
+                fetchRequest.predicate = NSPredicate(format: "username == %@", user.username)
+                let results = try context.fetch(fetchRequest) as! [UserDetailsCore]
+                if let u = results.first {
+                    u.setValuesIgnoreDetails(user)
+                    try context.save()
+                } else {
+                    if update == true {
+                        let u = NSManagedObject(entity: entity, insertInto: context) as! UserDetailsCore
+                        u.setValues(user)
+                        try context.save()
+                    }
                 }
             }
-        } catch let error {
-            print(error)
         }
-    }
-    
-    func updateUsersIgnoreNotes(_ users: [UserDetails]) {
-        var us: [UserDetails] = []
-        for user in users {
-            let u = UserDetails()
-            user.copyTo(u)
-            
-            us.append(u)
-        }
-        
-        do {
-            let realm = try Realm()
-            
-            for u in us {
-                let object = realm.object(ofType: UserDetails.self, forPrimaryKey: u.username)
-                if let object = object {
-                    u.notes = object.notes
-                }
-            }
-            
-            try realm.write {
-                for u in us {
-                    realm.add(u, update: .all)
-                }
-            }
-        } catch let error {
-            print(error)
-        }
-    }
-    
-    func updateUsersIgnoreDetails(_ users: [UserDetails]) {
-        var us: [UserDetails] = []
-        for user in users {
-            let u = UserDetails()
-            user.copyTo(u)
-            
-            us.append(u)
-        }
-        
-        do {
-            let realm = try Realm()
-            
-            for u in us {
-                let object = realm.object(ofType: UserDetails.self, forPrimaryKey: u.username)
-                if let object = object {
-                    u.notes = object.notes
-                    
-                    u.name = object.name
-                    u.company = object.company
-                    u.blog = object.blog
-                    u.followers = object.followers
-                    u.following = object.following
-                }
-            }
-            
-            try realm.write {
-                for u in us {
-                    realm.add(u, update: .all)
-                }
-            }
-        } catch let error {
+        catch let error {
             print(error)
         }
     }
@@ -238,9 +176,13 @@ class UsersStore {
 extension UsersStore {
     
     func searchUsers(with text: String) -> [UserDetails] {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "UserDetailsCore")
+        
         do {
-            let realm = try Realm()
-            let objects = realm.objects(UserDetails.self).filter("username CONTAINS[c] '\(text)' OR notes CONTAINS[c] '\(text)'")
+            fetchRequest.predicate = NSPredicate(format: "username CONTAINS[c] '\(text)' OR notes CONTAINS[c] '\(text)'")
+            let objects = try context.fetch(fetchRequest) as! [UserDetailsCore]
             
             var pureObjects: [UserDetails] = []
             for object in objects {
