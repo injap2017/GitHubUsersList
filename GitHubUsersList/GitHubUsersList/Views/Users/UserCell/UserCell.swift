@@ -20,7 +20,7 @@ class UserCell: UITableViewCell {
     public var user: UserDetails? {
         didSet {
             if let user = user {
-                self.avatarImageView.sd_setImage(with: URL(string: user.avatar))
+                self.avatarImageView.load(url: URL(string: user.avatar)!, placeholder: nil)
                 self.usernameLabel.text = user.username
                 self.detailsLabel.text = user.htmlURL
                 self.noteButton.isHidden = user.notes.isEmpty
