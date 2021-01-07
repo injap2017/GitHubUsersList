@@ -44,7 +44,7 @@ extension UserDetailsViewController {
     
     class func syncData(user: UserDetails, completion: @escaping (UserDetailsViewController?, Error?) -> Void) {
         
-        AppSync.Users.getUser(of: user.username) { (user, error) in
+        AppSync.Users.getUser(of: user.login) { (user, error) in
             if let error = error {
                 print(error)
                 
@@ -59,9 +59,9 @@ extension UserDetailsViewController {
     
     func initView() {
         // title
-        self.title = user.username
+        self.title = user.login
         
-        self.avatarImageView.load(url: URL(string: user.avatar)!, placeholder: UIImage(named: "blank-avatar"))
+        self.avatarImageView.load(url: URL(string: user.avatar_url)!, placeholder: UIImage(named: "blank-avatar"))
         self.followersLabel.text = "followers: \(user.followers)"
         self.followingLabel.text = "following: \(user.following)"
         self.nameLabel.text = user.name

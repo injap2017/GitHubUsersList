@@ -30,7 +30,7 @@ class UsersStore {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "UserDetailsCore")
         
         do {
-            fetchRequest.predicate = NSPredicate(format: "username == %@", username)
+            fetchRequest.predicate = NSPredicate(format: "login == %@", username)
             let results = try context.fetch(fetchRequest) as! [UserDetailsCore]
             if let u = results.first {
                 let pureObject = UserDetails()
@@ -53,7 +53,7 @@ class UsersStore {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "UserDetailsCore")
         
         do {
-            fetchRequest.predicate = NSPredicate(format: "username == %@", user.username)
+            fetchRequest.predicate = NSPredicate(format: "login == %@", user.login)
             let results = try context.fetch(fetchRequest) as! [UserDetailsCore]
             if let u = results.first {
                 u.setValues(user)
@@ -78,7 +78,7 @@ class UsersStore {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "UserDetailsCore")
         
         do {
-            fetchRequest.predicate = NSPredicate(format: "username == %@", user.username)
+            fetchRequest.predicate = NSPredicate(format: "login == %@", user.login)
             let results = try context.fetch(fetchRequest) as! [UserDetailsCore]
             if let u = results.first {
                 u.setValuesIgnoreNotes(user)
@@ -133,7 +133,7 @@ class UsersStore {
         
         do {
             for user in users {
-                fetchRequest.predicate = NSPredicate(format: "username == %@", user.username)
+                fetchRequest.predicate = NSPredicate(format: "login == %@", user.login)
                 let results = try context.fetch(fetchRequest) as! [UserDetailsCore]
                 if let u = results.first {
                     u.setValuesIgnoreDetails(user)
@@ -162,7 +162,7 @@ extension UsersStore {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "UserDetailsCore")
         
         do {
-            fetchRequest.predicate = NSPredicate(format: "username CONTAINS[c] '\(text)' OR notes CONTAINS[c] '\(text)'")
+            fetchRequest.predicate = NSPredicate(format: "login CONTAINS[c] '\(text)' OR notes CONTAINS[c] '\(text)'")
             let objects = try context.fetch(fetchRequest) as! [UserDetailsCore]
             
             var pureObjects: [UserDetails] = []

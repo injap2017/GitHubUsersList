@@ -19,9 +19,9 @@ class UserCell: UITableViewCell {
     public var user: UserDetails? {
         didSet {
             if let user = user {
-                self.avatarImageView.load(url: URL(string: user.avatar)!, placeholder: UIImage(named: "blank-avatar"))
-                self.usernameLabel.text = user.username
-                self.detailsLabel.text = user.htmlURL
+                self.avatarImageView.load(url: URL(string: user.avatar_url)!, placeholder: UIImage(named: "blank-avatar"))
+                self.usernameLabel.text = user.login
+                self.detailsLabel.text = user.html_url
                 self.noteButton.isHidden = user.notes.isEmpty
             }
         }

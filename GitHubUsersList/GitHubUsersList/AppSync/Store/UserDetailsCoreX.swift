@@ -11,10 +11,10 @@ extension UserDetailsCore {
     
     func setValues(_ user: UserDetails) {
         setValue(user.id, forKeyPath: "id")
-        setValue(user.username, forKeyPath: "username")
-        setValue(user.avatar, forKeyPath: "avatar")
+        setValue(user.login, forKeyPath: "login")
+        setValue(user.avatar_url, forKeyPath: "avatar_url")
         setValue(user.url, forKeyPath: "url")
-        setValue(user.htmlURL, forKeyPath: "htmlURL")
+        setValue(user.html_url, forKeyPath: "html_url")
         setValue(user.name, forKeyPath: "name")
         setValue(user.company, forKeyPath: "company")
         setValue(user.blog, forKeyPath: "blog")
@@ -25,10 +25,10 @@ extension UserDetailsCore {
     
     func setValuesIgnoreNotes(_ user: UserDetails) {
         setValue(user.id, forKeyPath: "id")
-        setValue(user.username, forKeyPath: "username")
-        setValue(user.avatar, forKeyPath: "avatar")
+        setValue(user.login, forKeyPath: "login")
+        setValue(user.avatar_url, forKeyPath: "avatar_url")
         setValue(user.url, forKeyPath: "url")
-        setValue(user.htmlURL, forKeyPath: "htmlURL")
+        setValue(user.html_url, forKeyPath: "html_url")
         setValue(user.name, forKeyPath: "name")
         setValue(user.company, forKeyPath: "company")
         setValue(user.blog, forKeyPath: "blog")
@@ -38,18 +38,18 @@ extension UserDetailsCore {
     
     func setValuesIgnoreDetails(_ user: UserDetails) {
         setValue(user.id, forKeyPath: "id")
-        setValue(user.username, forKeyPath: "username")
-        setValue(user.avatar, forKeyPath: "avatar")
+        setValue(user.login, forKeyPath: "login")
+        setValue(user.avatar_url, forKeyPath: "avatar_url")
         setValue(user.url, forKeyPath: "url")
-        setValue(user.htmlURL, forKeyPath: "htmlURL")
+        setValue(user.html_url, forKeyPath: "html_url")
     }
     
     func copyTo(_ user: UserDetails) {
         user.id = Int(id)
-        user.username = username ?? ""
-        user.avatar = avatar ?? ""
+        user.login = login ?? ""
+        user.avatar_url = avatar_url ?? ""
         user.url = url ?? ""
-        user.htmlURL = htmlURL ?? ""
+        user.html_url = html_url ?? ""
         user.name = name ?? ""
         user.company = company ?? ""
         user.blog = blog ?? ""

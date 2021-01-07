@@ -6,34 +6,32 @@
 //
 
 import Foundation
-import Alamofire
-import AlamofireObjectMapper
 
-class UsersAPI {
+class UsersAPI: NetworkController {
     
     func getUser(of username: String, completion: @escaping (UserDetails?, Error?) -> Void) {
-        AF.request(Router.getUser(username))
-            .validate(statusCode: 200..<300)
-            .responseObject { (response: AFDataResponse<UserDetails>) in
-                switch response.result {
-                case .success(let user):
-                    completion(user, nil)
-                case .failure(let error):
-                    completion(nil, error)
-                }
+        let request = try! Router.getUser(username).asURLRequest()
+        
+        dataTask(with: request) { (result: Result<UserDetails, NetworkControllerError>) in
+            switch result {
+            case .success(let user):
+                completion(user, nil)
+            case .failure(let error):
+                completion(nil, error)
+            }
         }
     }
     
     func getUsers(since at: Int, per_page: Int, completion: @escaping ([UserDetails]?, Error?) -> Void) {
-        AF.request(Router.getUsers(at, per_page))
-            .validate(statusCode: 200..<300)
-            .responseArray { (response: AFDataResponse<[UserDetails]>) in
-                switch response.result {
-                case .success(let users):
-                    completion(users, nil)
-                case .failure(let error):
-                    completion(nil, error)
-                }
+        let request = try! Router.getUsers(at, per_page).asURLRequest()
+        
+        dataTask(with: request) { (result: Result<[UserDetails], NetworkControllerError>) in
+            switch result {
+            case .success(let users):
+                completion(users, nil)
+            case .failure(let error):
+                completion(nil, error)
+            }
         }
     }
 }
