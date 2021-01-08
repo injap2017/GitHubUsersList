@@ -1,11 +1,7 @@
 PODS:
-  - Alamofire (5.0.0-rc.2)
-  - AlamofireObjectMapper (6.2.0):
-    - Alamofire (= 5.0.0-rc.2)
-    - ObjectMapper (~> 3.5.1)
+  - Alamofire (5.4.1)
   - DCKit (1.0.13)
   - IQKeyboardManagerSwift (6.5.6)
-  - ObjectMapper (3.5.3)
   - PullToRefreshKit (0.8.8)
   - SVProgressHUD (2.2.5)
   - SwifterSwift (5.2.0):
@@ -35,7 +31,7 @@ PODS:
   - SwifterSwift/UIKit (5.2.0)
 
 DEPENDENCIES:
-  - AlamofireObjectMapper
+  - Alamofire
   - DCKit
   - IQKeyboardManagerSwift
   - PullToRefreshKit
@@ -45,24 +41,20 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
-    - AlamofireObjectMapper
     - DCKit
     - IQKeyboardManagerSwift
-    - ObjectMapper
     - PullToRefreshKit
     - SVProgressHUD
     - SwifterSwift
 
 SPEC CHECKSUMS:
-  Alamofire: f9450d3c7f6bea2ad62e7a541c3e9b186c7991d6
-  AlamofireObjectMapper: 74d1440c92c42bbcc2b5f4dc81654ac095ec669f
+  Alamofire: 2291f7d21ca607c491dd17642e5d40fdcda0e65c
   DCKit: ca310752c3a4d442e772de66ce4e4168ea906d62
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
-  ObjectMapper: 97111c97e054a6ee25917662106689f0b4127b37
   PullToRefreshKit: 7cc53e720e69f135cffa1a57784dfb534f0222ab
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwifterSwift: 334181863c416882d97b7a60c05054d9e4d799e2
 
-PODFILE CHECKSUM: ad40cc74d11e85813b10cc4262f0b2d1d1b99f16
+PODFILE CHECKSUM: d9d455ae615c8c9a883e5c5dac46b2188be89248
 
 COCOAPODS: 1.10.0

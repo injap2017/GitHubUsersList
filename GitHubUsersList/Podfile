@@ -6,10 +6,10 @@ target 'GitHubUsersList' do
   use_frameworks!
 
   # Pods for GitHubUsersList
-  pod 'AlamofireObjectMapper'
   pod 'DCKit'
   pod 'SVProgressHUD'
   pod 'IQKeyboardManagerSwift'
   pod 'SwifterSwift'
+  pod 'Alamofire'
   pod 'PullToRefreshKit'
 end
